@@ -88,7 +88,7 @@ Enformer_single_sequence.py -d hg38.fa \
     -t 1 -p 1 -b 0
 ```
 See predicted tracks below.
-<img src="HBE1_locus_human_predicted_contr_scores.pdf" alt="HBE1_locus" height="400"/>
+<img src="HBE1_locus_human_predicted_contr_scores.png" alt="HBE1_locus" height="300"/>
 <br>
 
 ## Example for myc mouse locus
@@ -102,10 +102,10 @@ Enformer_single_sequence.py -d mm10.fa \
     -t 1 -p 1 -b 0
 ```
 See predicted tracks below.
-<img src="myc_TSS_mouse_predicted_contr_scores.pdf" alt="myc_TSS" height="400"/>
+<img src="myc_TSS_mouse_predicted_and_contr_scores.png" alt="myc_TSS" height="300"/>
 <br>
 
 # Tutorial
-A tutorial that explains the differents steps can be found in the following colab notebook: https://colab.research.google.com/drive/1qknFWSiRdCHM_ghC4Lw6wxry-kNIZCic?usp=sharing. You can run this notebook yourself to experiment with DeepSTARR.  
+A tutorial that explains the different steps can be found in the following colab notebook: https://colab.research.google.com/drive/1qknFWSiRdCHM_ghC4Lw6wxry-kNIZCic?usp=sharing. You can run this notebook yourself to experiment with Enformer.  
 This code and tutorial are based on the [enformer-usage colab](https://github.com/deepmind/deepmind-research/tree/master/enformer#enformer-usageipynb-).
 
