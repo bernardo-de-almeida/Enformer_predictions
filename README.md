@@ -52,7 +52,7 @@ Where:
 * -o output name to label files
 * -t save full table of predictions for all feature/targets?: 0/1
 * -p plot tracks per feature/target of interest?: 0/1
-* -b create bigwigs per predicted track?: 0/1
+* -b create bigwigs per predicted track?: 0/1 - can be loaded to Genome Browsers
 
 &nbsp;  
 Target features of interest (from [Kelley et al., PLoS Comput Biol 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008050)):
