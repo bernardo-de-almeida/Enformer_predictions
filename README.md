@@ -80,7 +80,7 @@ Features include DNASE, CHIP:GATA1 and CAGE for leukemia cell line K562 (where H
 ```
 Enformer_single_sequence.py -d hg38.fa \
     -s human \
-    -f 121,4828,370,1330,4980 \
+    -f 121,1330,4828,370,4980 \
     -i chr11:5229921-5306870 \
     -o HBE1_locus \
     -t 1 -p 1 -b 0

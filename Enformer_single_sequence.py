@@ -152,8 +152,8 @@ predictions = model.predict_on_batch(sequence_one_hot[np.newaxis])[species][0] #
 predictions.shape
 
 # Extract IDs for features based on index
-features_split = [int(i) for i in features.split(",")]
-IDs = df_targets.loc[df_targets['index'].isin(features_split)].index
+IDs = [df_targets.loc[df_targets['index'] == int(i)].index.values[0] for i in features.split(",")]
+
 tracks = {}
 for i in IDs:
     tracks[df_targets.description[i]] = predictions[:, i]
