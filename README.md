@@ -54,12 +54,12 @@ Where:
 * -p plot tracks per feature/target of interest?: 0/1
 * -b create bigwigs per predicted track?: 0/1
 
-<br>
+&nbsp;  
 Target features of interest (from [Kelley et al., PLoS Comput Biol 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008050)):
 - [human (n=5,313)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_human.txt)
 - [mouse (n=1,643)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_mouse.txt)
 
-<br>
+&nbsp;  
 The outputs are:
 - csv file with genomic bins predictions per feature/target of interest
 - csv file with genomic bins predictions for all feature/target of species [if t=1]
@@ -67,10 +67,8 @@ The outputs are:
 - bigwigs for tracks per feature/target of interest in folder ${output}_tracks [if b=1]
 
 ## Example for HBE1 human locus
-The β-globin locus contains five globin genes and has been extensively characterized. It includes 5 regulatory elements marked by DNase accessibility, termed HS1-5. Prior [work](https://www.nature.com/articles/nmeth.3630) has found that HS2 strongly activates
-transcription in comparison with HS1 and HS3-5 (see barplots under the tracks).
+The β-globin locus contains five globin genes and has been extensively characterized. It includes 5 regulatory elements marked by DNase accessibility, termed HS1-5. Prior [work](https://www.nature.com/articles/nmeth.3630) has found that HS2 strongly activates transcription in comparison with HS1 and HS3-5 (see barplots under the tracks).
 
-<br></br>
 <img src="https://bernardo-de-almeida.github.io/tutorials/DeepLearning_genomics/HBE1_locus_enhancers.png" alt="modisco dev" height="350"/>
 
 Figure adapted from [Agarwal et al.](https://www.biorxiv.org/content/10.1101/2023.03.05.531189v1)
@@ -87,9 +85,9 @@ Enformer_single_sequence.py -d hg38.fa \
     -o HBE1_locus \
     -t 1 -p 1 -b 0
 ```
-See predicted tracks below.
-<img src="HBE1_locus_human_predicted_contr_scores.png" alt="HBE1_locus" height="300"/>
-<br>
+See predicted tracks below.  
+<img src="HBE1_locus_human_predicted_and_contr_scores.png" alt="HBE1_locus" height="400"/>
+&nbsp;  
 
 ## Example for myc mouse locus
 Predictions for mm10 region centred on mouse myc TSS: chr15:61928220-62042908
@@ -101,9 +99,9 @@ Enformer_single_sequence.py -d mm10.fa \
     -o myc_TSS \
     -t 1 -p 1 -b 0
 ```
-See predicted tracks below.
-<img src="myc_TSS_mouse_predicted_and_contr_scores.png" alt="myc_TSS" height="300"/>
-<br>
+See predicted tracks below.  
+<img src="myc_TSS_mouse_predicted_and_contr_scores.png" alt="myc_TSS" height="400"/>
+&nbsp;  
 
 # Tutorial
 A tutorial that explains the different steps can be found in the following colab notebook: https://colab.research.google.com/drive/1qknFWSiRdCHM_ghC4Lw6wxry-kNIZCic?usp=sharing. You can run this notebook yourself to experiment with Enformer.  
