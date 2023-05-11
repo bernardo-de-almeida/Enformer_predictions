@@ -37,7 +37,12 @@ conda activate Enformer
 
 Run prediction script (using example from [paper Fig 1](https://www.nature.com/articles/s41592-021-01252-x#Fig1)):
 ```
-python Enformer_single_sequence.py -d hg38.fa -s human -f 41,42,706,4799 -i chr11:35082742-35197430 -o test_interval -t 0 -p 1 -b 0
+python Enformer_single_sequence.py -d hg38.fa \
+    -s human \
+    -f 41,42,706,4799 \
+    -i chr11:35082742-35197430 \
+    -o test_interval \
+    -t 0 -p 1 -b 0
 ```
 Where:
 * -d FASTA sequence file: Genome fasta file if providing interval, or fasta sequence of interest to make predictions
@@ -49,10 +54,12 @@ Where:
 * -p plot tracks per feature/target of interest?: 0/1
 * -b create bigwigs per predicted track?: 0/1
 
+<br>
 Target features of interest (from [Kelley et al., PLoS Comput Biol 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008050)):
-- human (n=5,313): https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_human.txt
-- mouse (n=1,643): https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_mouse.txt
+- [human (n=5,313)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_human.txt)
+- [mouse (n=1,643)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_mouse.txt)
 
+<br>
 The outputs are:
 - csv file with genomic bins predictions per feature/target of interest
 - csv file with genomic bins predictions for all feature/target of species [if t=1]
@@ -60,16 +67,45 @@ The outputs are:
 - bigwigs for tracks per feature/target of interest in folder ${output}_tracks [if b=1]
 
 ## Example for HBE1 human locus
-hg38 region centred on human HBE1 TSS: chr11:5229921-5306870
+The β-globin locus contains five globin genes and has been extensively characterized. It includes 5 regulatory elements marked by DNase accessibility, termed HS1-5. Prior [work](https://www.nature.com/articles/nmeth.3630) has found that HS2 strongly activates
+transcription in comparison with HS1 and HS3-5 (see barplots under the tracks).
+
+<br></br>
+<img src="https://bernardo-de-almeida.github.io/tutorials/DeepLearning_genomics/HBE1_locus_enhancers.png" alt="modisco dev" height="350"/>
+
+Figure adapted from [Agarwal et al.](https://www.biorxiv.org/content/10.1101/2023.03.05.531189v1)
+
+Let's see what Enformer predicts for this region, both in terms of chromatin states and gene expression, but also the importance of each of these regulatory elements to HBE1 expression!
+
+Predictions for hg38 region centred on human HBE1 TSS: chr11:5229921-5306870
+Features include DNASE, CHIP:GATA1 and CAGE for leukemia cell line K562 (where HBE1 should be active), together with DNASE and CAGE for brain samples as control
 ```
-Enformer_single_sequence.py -d hg38.fa -s human -f 121,1330,4828,370,4980 -i chr11:5229921-5306870 -o HBE1_locus -t 1 -p 1 -b 0
+Enformer_single_sequence.py -d hg38.fa \
+    -s human \
+    -f 121,4828,370,1330,4980 \
+    -i chr11:5229921-5306870 \
+    -o HBE1_locus \
+    -t 1 -p 1 -b 0
 ```
 See predicted tracks below.
+<img src="HBE1_locus_human_predicted_contr_scores.pdf" alt="HBE1_locus" height="400"/>
+<br>
 
 ## Example for myc mouse locus
-mm10 region centred on mouse myc TSS: chr15:61928220-62042908
+Predictions for mm10 region centred on mouse myc TSS: chr15:61928220-62042908
 ```
-Enformer_single_sequence.py -d mm10.fa -s mouse -f 5315,5316,5691,5692,6938 -i chr15:61928220-62042908 -o myc_TSS -t 1 -p 1 -b 0
+Enformer_single_sequence.py -d mm10.fa \
+    -s mouse \
+    -f 5315,5316,5691,5692,6938 \
+    -i chr15:61928220-62042908 \
+    -o myc_TSS \
+    -t 1 -p 1 -b 0
 ```
 See predicted tracks below.
+<img src="myc_TSS_mouse_predicted_contr_scores.pdf" alt="myc_TSS" height="400"/>
+<br>
+
+# Tutorial
+A tutorial that explains the differents steps can be found in the following colab notebook: https://colab.research.google.com/drive/1qknFWSiRdCHM_ghC4Lw6wxry-kNIZCic?usp=sharing. You can run this notebook yourself to experiment with DeepSTARR.  
+This code and tutorial are based on the [enformer-usage colab](https://github.com/deepmind/deepmind-research/tree/master/enformer#enformer-usageipynb-).
 
