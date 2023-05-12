@@ -162,7 +162,9 @@ def plot_tracks(tracks, start, end, xtitle="", height=1.5):
     if 'DNASE:' in title: col = 'tab:orange'
     if 'ATAC:' in title: col = 'tab:red'
     if 'CHIP:' in title: col = 'tab:purple' # TFs
+    if 'CHIP:H4' in title: col = '#8c564b' # histones
     if 'CHIP:H3' in title: col = '#8c564b' # histones
+    if 'CHIP:H2' in title: col = '#8c564b' # histones
     if 'CAGE:' in title: col = 'tab:green'
     if 'gradient*input' in title: col = '#1f77b4'
     
