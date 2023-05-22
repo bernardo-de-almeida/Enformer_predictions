@@ -10,8 +10,8 @@ You can find out more about it at https://github.com/deepmind/deepmind-research/
 <img src="https://bernardo-de-almeida.github.io/tutorials/DeepLearning_genomics/Enformer_model.png" alt="enformer" height="500"/>
 <img src="https://bernardo-de-almeida.github.io/tutorials/DeepLearning_genomics/Enformer_architecture.png" alt="enformer2" height="500"/>
 
-# Make predictions to new sequences
-Prepare your environment:
+# Prepare your environment
+
 ```
 # Clone this repository
 git clone https://github.com/bernardo-de-almeida/Enformer_predictions.git
@@ -30,14 +30,23 @@ pip install kipoiseq==0.5.2
 pip install pyfaidx
 pip install joblib
 pip install pyBigWig
+pip install biopython
 
 # activate environment
 conda activate Enformer
 ```
 
+# Genomic features predicted by Enformer
+
+Target features of interest (from [Kelley et al., PLoS Comput Biol 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008050)):
+- [human (n=5,313)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_human.txt)
+- [mouse (n=1,643)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_mouse.txt)
+
+# Make predictions for a genomic interval
+
 Run prediction script (using example from [paper Fig 1](https://www.nature.com/articles/s41592-021-01252-x#Fig1)):
 ```
-python Enformer_single_sequence.py -d hg38.fa \
+python Enformer_single_coordinate.py -d hg38.fa \
     -s human \
     -f 41,42,706,4799 \
     -i chr11:35082742-35197430 \
@@ -45,19 +54,14 @@ python Enformer_single_sequence.py -d hg38.fa \
     -t 0 -p 1 -b 0
 ```
 Where:
-* -d FASTA sequence file: Genome fasta file if providing interval, or fasta sequence of interest to make predictions
+* -d FASTA sequence file: Genome fasta file if providing interval, or fasta sequence of interest (only one sequence) to make predictions
 * -s species of features/targets of interest: 'human' or 'mouse' (see tables below for details)
-* -f feature/target IDs from table indexes to get predictions for: e.g. '0,23,809' (see tables below for details)
+* -f feature/target IDs from table indexes to get predictions for: e.g. '0,23,809' (see tables above for details)
 * -i genomic interval: e.g. 'chr11:35082742-35197430'; will be resized to match model input size
 * -o output name to label files
 * -t save full table of predictions for all feature/targets?: 0/1
 * -p plot tracks per feature/target of interest?: 0/1
 * -b create bigwigs per predicted track?: 0/1 - can be loaded to Genome Browsers
-
-&nbsp;  
-Target features of interest (from [Kelley et al., PLoS Comput Biol 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008050)):
-- [human (n=5,313)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_human.txt)
-- [mouse (n=1,643)](https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_mouse.txt)
 
 &nbsp;  
 The outputs are:
@@ -78,7 +82,7 @@ Let's see what Enformer predicts for this region, both in terms of chromatin sta
 Predictions for hg38 region centred on human HBE1 TSS: chr11:5229921-5306870
 Features include DNASE, CHIP:GATA1 and CAGE for leukemia cell line K562 (where HBE1 should be active), together with DNASE and CAGE for brain samples as control
 ```
-Enformer_single_sequence.py -d hg38.fa \
+Enformer_single_coordinate.py -d hg38.fa \
     -s human \
     -f 121,1330,4828,370,4980 \
     -i chr11:5229921-5306870 \
@@ -92,7 +96,7 @@ See predicted tracks below.
 ## Example for myc mouse locus
 Predictions for mm10 region centred on mouse myc TSS: chr15:61928220-62042908
 ```
-Enformer_single_sequence.py -d mm10.fa \
+Enformer_single_coordinate.py -d mm10.fa \
     -s mouse \
     -f 5315,5316,5691,5692,6938 \
     -i chr15:61928220-62042908 \
@@ -102,6 +106,27 @@ Enformer_single_sequence.py -d mm10.fa \
 See predicted tracks below.  
 <img src="myc_TSS_mouse_predicted_and_contr_scores.png" alt="myc_TSS" height="400"/>
 &nbsp;  
+
+# Make predictions for a fasta file with many sequences
+
+Run prediction script on fasta file example:
+```
+python Enformer_multiple_sequences.py \
+    -d Examples_sequences_CD44_DDX1_hg38.fa \
+    -f 41,42,706,4799 \
+    -o test_fasta \
+    -t 0
+```
+Where:
+* -d FASTA sequence file with DNA sequences of interest [will be padded with NAs if sequence is smaller than Enformer's input (393216bp)]
+* -f feature/target IDs from table indexes (both human and mouse together) to get predictions for: e.g. '0,23,809' (see tables above for details)
+* -o output name to label files
+* -t save full table of predictions for all feature/targets?: 0/1
+
+&nbsp;  
+The outputs are:
+- csv file with genomic bins predictions per feature/target of interest, per sequence in the fasta file (see rownames)
+- csv file with genomic bins predictions for all feature/targets for both species, per sequence in the fasta file (see rownames) [if t=1]
 
 # Tutorial
 A tutorial that explains the different steps can be found in the following colab notebook: https://colab.research.google.com/drive/1qknFWSiRdCHM_ghC4Lw6wxry-kNIZCic?usp=sharing. You can run this notebook yourself to experiment with Enformer.  
